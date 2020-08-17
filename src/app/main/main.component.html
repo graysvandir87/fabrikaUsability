@@ -1,37 +1,26 @@
 <div class="form-input-wrapper">
-	<!-- <h1>{{ solData.title }}</h1>
-	<h2>{{ solData.description }}</h2>
-	<p>{{ solData.detail }}</p>
-	
-	<label for="lang">Choose Language: </label>
-	<mat-select [(ngModel)]="lang" name="lang" class="my-select">
-	  <mat-option [value]="" selected></mat-option>
-	  <mat-option *ngFor="let option of languages" [value]="option.value">{{option.name}}</mat-option>
-	</mat-select>
-	
-	<button id="translatebtn" (click)="testConnection()">Translate</button> -->
-
 	<mat-label style="margin-right: 8px;">Enter name for translation: </mat-label>
 	<input type="text" [(ngModel)]="translation.translation_name" class="my-input">
 </div>
+<div class="main-form-block-inner">
+	<mat-label>Choose language to translate</mat-label>
+	<mat-select [(ngModel)]="translation.translation_lang" name="languages" class="my-select">
+		<mat-option [value]="" selected></mat-option>
+		<mat-option *ngFor="let option of azureLanguages" [value]="option">
+			{{option}}
+		</mat-option>
+	</mat-select>
+</div>
 <div class="main-form">
 	<div class="main-form-block">
-		<div class="main-form-block-inner">
-			<mat-label>Choose language for initial text</mat-label>
-			<mat-select [(ngModel)]="translation.initial_lang" name="languages" class="my-select">
-				<mat-option [value]="" selected></mat-option>
-				<mat-option *ngFor="let option of languages" [value]="option.value">
-					{{option.name}}
-				</mat-option>
-			</mat-select>
-		</div>
+		
 		<div class="main-form-block-inner">
 			<mat-label>Enter initial text</mat-label>
 			<textarea matInput placeholder="Enter text..." [(ngModel)]="translation.initial_text"></textarea>
 		</div>
 	</div>
 	<div class="main-form-block">
-		<div class="main-form-block-inner">
+		<!-- <div class="main-form-block-inner">
 			<mat-label>Choose language for translation</mat-label>
 			<mat-select [(ngModel)]="translation.translation_lang" name="languages" class="my-select">
 				<mat-option [value]="" selected></mat-option>
@@ -39,10 +28,10 @@
 					{{option.name}}
 				</mat-option>
 			</mat-select>
-		</div>
+		</div> -->
 		<div class="main-form-block-inner">
-			<mat-label>Enter translation</mat-label>
-			<textarea matInput placeholder="Enter translation..." [(ngModel)]="translation.translation_text"></textarea>
+			<mat-label>Translation</mat-label>
+			<textarea matInput readonly placeholder="Enter translation..." [(ngModel)]="translation.translation_text"></textarea>
 		</div>
 	</div>
 </div>
@@ -51,14 +40,13 @@
 		*ngIf="showUploadBtn"
 		mat-raised-button
 		color="primary"
-		(click)="setTranslation(translation)">
-		Upload
+		(click)="translateText(translation)"
+		style="margin-right: 8px">
+		Test translate
 	</button>
-
 	<button
 		mat-raised-button
-		color="primary"
-		(click)="getLanguages()">
-		Test connection
+		(click)="clearForm()">
+		Refresh
 	</button>
 </div>

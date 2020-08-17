@@ -1,6 +1,7 @@
 .form-input-wrapper {
     display: flex;
     align-items: center;
+    margin-bottom: 8px;
 }
 .main-form {
     width: 100%;
@@ -28,7 +29,7 @@
 .my-select {
     border: 1px solid;
     padding: 8px;
-    width: 96%;
+    width: 48%;
 }
 .form-button-wrapper {
     display: flex;

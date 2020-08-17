@@ -27,27 +27,13 @@ export class MainComponent implements OnInit {
 	languages: Array<any>;
   translation: any;
 
-  solData: Solution = {
-    title: '',
-    description: '',
-    detail: ''
-  };
+  responseLanguages: any;
+  azureLanguages: any;
 
-  lang: string;
-
-  
   
   constructor(private http: HttpClient, private data: DataService, private solution: SolutionService, private google: GoogletranslateService) {
     
     this.translations = [];
-		this.languages = [
-			{ name: 'Русский', value: 'ru' },
-			{ name: 'English', value: 'en' },
-      { name: 'French', value: 'fr' },
-      { name: 'Spanish', value: 'es' },
-      { name: 'German', value: 'de' },
-      { name: 'Arabic', value: 'ar' }
-		];
 		this.translation = {
 			translation_name: '',
 			initial_text: '',
@@ -56,7 +42,6 @@ export class MainComponent implements OnInit {
 			translation_lang: ''
 		};
     this.showUploadBtn = true;
-    this.lang = 'en';
    }
 
   ngOnInit(): void {
@@ -70,103 +55,93 @@ export class MainComponent implements OnInit {
     // hide upload button to avoid uploading same translation
     (Object.keys(this.translation).length > 0) ? this.showUploadBtn = false : this.showUploadBtn = true;
 
-    this.solution.getSolution().subscribe(res => this.solData = res);
-    console.log(this.solData);
- 
-    // translate('Ik spreek Engels', {to: 'en'}).then(res => {
-    //     console.log(res.text);
-    //     //=> I speak English
-    //     console.log(res.from.language.iso);
-    //     //=> nl
-    // }).catch(err => {
-    //     console.error(err);
-    // })
-
-    this.getAvailableLanguage()
-  }
-
-  public getAvailableLanguage() {
-    return this.http.get('https://api.cognitive.microsofttranslator.com/')
-      .pipe(response => {
-        console.log('Response',response);
-        return response;
-      });
-  }
-
-  public setTranslation(item) {
-    console.log('Get: ', item);
-    this.translations.push(item);
-    localStorage.setItem('user-translation', JSON.stringify(this.translations));
-    this.clearForm();
+    // test solution for google api
+    // this.solution.getSolution().subscribe(res => this.solData = res);
+    // console.log(this.solData);
+    
+    // get languages
+    this.getLanguages();
   }
 
   public clearForm() {
-	  this.translation = {};
+    this.translation = {};
+    this.showUploadBtn = true;
   }
 
   public getLanguages() {
     this.http.get('https://api.cognitive.microsofttranslator.com/languages?api-version=3.0&scope=translation')
       .subscribe(response => {
         console.log('Reponse',response);
+        this.responseLanguages = response;
+        this.azureLanguages = Object.keys(this.responseLanguages.translation)
+        console.log('Languages',this.azureLanguages);
         return response;
     });
   }
 
-  public translateText(){
-    let options = {
-        method: 'POST',
-        baseUrl: 'https://api.cognitive.microsofttranslator.com/',
-        url: 'translate',
-        qs: {
-          'api-version': '3.0',
-          'to': ['de', 'it']
-        },
-        headers: {
-          'Ocp-Apim-Subscription-Key': 'b76bf350a06c42b885c06d58ab69f0f9',
-          'Ocp-Apim-Subscription-Region': 'westeurope',
-          'Content-type': 'application/json',
-          'X-ClientTraceId': uuid.v4().toString()
-        },
-        body: [{
-          'text': 'Hello World!'
-        }],
-        json: true,
-    };
+  public translateText(item){
 
-    // this.http.post(options.baseUrl, options).subscribe(
-    //   success => {
-    //       console.log('response',success);
-    //   }
-    // );
-    
+    const headers = { 
+      'Ocp-Apim-Subscription-Key': 'b76bf350a06c42b885c06d58ab69f0f9',
+      'Ocp-Apim-Subscription-Region': 'westeurope',
+      'Content-type': 'application/json',
+      'X-ClientTraceId': uuid.v4().toString()
+    }
+    const body = [{
+      'text': item.initial_text
+    }]
+
+    let url = 'https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to='+item.translation_lang+'&json=true';
+
+    if(Object.keys(item).length < 3) {
+      alert('Вы ввели не все данные');
+    } else {
+      this.http.post<any>(url, body, { headers }).subscribe(response => {
+          if(response.length != 0) {
+            response.forEach(r => {
+              this.translation.initial_lang = r.detectedLanguage.language;
+              this.translation.translation_text = r.translations[0].text;
+            });
+
+            console.log('Current translation',this.translation);
+
+            this.translations.push(this.translation);
+            localStorage.setItem('user-translation', JSON.stringify(this.translations));
+          } else if (response.error.code != '') {
+            alert('Ошибка обращения к серверу')
+          }
+      });
+    }
+ 
   }
 
-  public testConnection2() {
-    const googleObj: GoogleObj = {
-      q: [this.solData.title, this.solData.description, this.solData.detail],
-      target: this.translation.translation_lang
-    };
-    this.google.translate(googleObj).subscribe( (res: any) => {
-        console.log(res.data.translations[0].translatedText)
-      },
-      err => {
-        console.log(err);
-      }
-    );
+  // test google api
+  // public testConnection2() {
+  //   const googleObj: GoogleObj = {
+  //     q: [this.solData.title, this.solData.description, this.solData.detail],
+  //     target: this.translation.translation_lang
+  //   };
+  //   this.google.translate(googleObj).subscribe( (res: any) => {
+  //       console.log(res.data.translations[0].translatedText)
+  //     },
+  //     err => {
+  //       console.log(err);
+  //     }
+  //   );
 
-    this.google.translate(googleObj).subscribe(
-      (res: any) => {
-        this.solData = {
-          title: res.data.translations[0].translatedText,
-          description: res.data.translations[1].translatedText,
-          detail: res.data.translations[2].translatedText
-        };
-        console.log(this.solData);
-      },
-      err => {
-        console.log(err);
-      }
-    );
-  }
+  //   this.google.translate(googleObj).subscribe(
+  //     (res: any) => {
+  //       this.solData = {
+  //         title: res.data.translations[0].translatedText,
+  //         description: res.data.translations[1].translatedText,
+  //         detail: res.data.translations[2].translatedText
+  //       };
+  //       console.log(this.solData);
+  //     },
+  //     err => {
+  //       console.log(err);
+  //     }
+  //   );
+  // }
 
 }
