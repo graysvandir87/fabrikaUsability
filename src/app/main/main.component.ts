@@ -133,11 +133,11 @@ export class MainComponent implements OnInit {
         json: true,
     };
 
-    this.http.post(options.baseUrl, options).subscribe(
-      success => {
-          console.log('response',success);
-      }
-    );
+    // this.http.post(options.baseUrl, options).subscribe(
+    //   success => {
+    //       console.log('response',success);
+    //   }
+    // );
     
   }
 
