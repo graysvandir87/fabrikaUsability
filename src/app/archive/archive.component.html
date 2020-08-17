@@ -3,7 +3,15 @@
 
     <mat-card *ngFor="let item of translations" class="my-card">
         <mat-icon class="my-icon">note</mat-icon> {{item.translation_name}} (initial: {{item.initial_lang}}; translation: {{item.translation_lang}})
-        <span class="my-spacer"></span>
-        <mat-icon class="open-icon" (click)="openDocument(item)">visibility</mat-icon>
+		<span class="my-spacer"></span>
+		<button mat-icon-button matTooltip="Download initial text" color="primary" aria-label="Download button" (click)="downloadInitialDocument(item)">
+			<mat-icon>attach_file</mat-icon>
+		</button>
+		<button mat-icon-button matTooltip="Download translation" color="accent" aria-label="Download button" (click)="downloadTranslationDocument(item)">
+			<mat-icon>attach_file</mat-icon>
+		</button>
+		<button mat-icon-button (click)="openDocument(item)">
+			<mat-icon>visibility</mat-icon>
+		</button>
     </mat-card>
 </div>

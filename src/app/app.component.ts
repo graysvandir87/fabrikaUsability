@@ -19,5 +19,6 @@ export class AppComponent {
     console.log('Set session...')
 		if(!sessionStorage.getItem('user-id') || sessionStorage.getItem('user-id') == '' || sessionStorage.getItem('user-id') == null) sessionStorage.setItem('user-id', this.userId);
 		else return;
-	}
+  }
+  
 }

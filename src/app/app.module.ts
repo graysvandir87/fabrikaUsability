@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavigationComponent } from './navigation/navigation.component';
+import { MainComponent } from './main/main.component';
 import { ArchiveComponent } from './archive/archive.component';
 
 import { LayoutModule } from '@angular/cdk/layout';
@@ -19,7 +20,7 @@ import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
-import { MainComponent } from './main/main.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { DataService } from './service/data.service';
 
@@ -48,7 +49,8 @@ import { DataService } from './service/data.service';
 	FormsModule,
 	MatInputModule,
 	MatSelectModule,
-	MatCardModule
+	MatCardModule,
+	MatTooltipModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

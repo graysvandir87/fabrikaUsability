@@ -25,6 +25,28 @@ export class ArchiveComponent implements OnInit {
 		console.log('Current document:', doc);
 		this.data.setTranslation(doc);
 		this.router.navigate(['/']);
-	}
+  }
+  
+  public downloadInitialDocument(doc) {
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([doc.initial_text], {
+      type: "text/plain"
+    }));
+    a.setAttribute("download", doc.translation_name+' ('+doc.initial_lang+').txt');
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
+  public downloadTranslationDocument(doc) {
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([doc.translation_text], {
+      type: "text/plain"
+    }));
+    a.setAttribute("download", doc.translation_name+' ('+doc.translation_lang+').txt');
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
 
 }
