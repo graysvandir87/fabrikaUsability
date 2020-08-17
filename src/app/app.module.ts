@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavigationComponent } from './navigation/navigation.component';
+import { ArchiveComponent } from './archive/archive.component';
 
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -19,7 +20,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import { MainComponent } from './main/main.component';
-import { ArchiveComponent } from './archive/archive.component';
+
+import { DataService } from './service/data.service';
 
 @NgModule({
   declarations: [
@@ -33,22 +35,22 @@ import { ArchiveComponent } from './archive/archive.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
-		HttpClientModule,
-		AppRoutingModule,
-		BrowserAnimationsModule,
-		LayoutModule,
-		MatToolbarModule,
-		MatButtonModule,
-		MatSidenavModule,
-		MatIconModule,
-		MatListModule,
-		MatFormFieldModule,
-		FormsModule,
-		MatInputModule,
-		MatSelectModule,
-		MatCardModule
+	HttpClientModule,
+	AppRoutingModule,
+	BrowserAnimationsModule,
+	LayoutModule,
+	MatToolbarModule,
+	MatButtonModule,
+	MatSidenavModule,
+	MatIconModule,
+	MatListModule,
+	MatFormFieldModule,
+	FormsModule,
+	MatInputModule,
+	MatSelectModule,
+	MatCardModule
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
