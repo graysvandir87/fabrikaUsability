@@ -50,7 +50,6 @@ export class MainComponent implements OnInit {
     
     // get selected translation from archive
     this.data.currentTranslation.subscribe(item => this.translation = item);
-    console.log('Current selected translation: ',this.translation);
 
     // hide upload button to avoid uploading same translation
     (Object.keys(this.translation).length > 0) ? this.showUploadBtn = false : this.showUploadBtn = true;
@@ -71,10 +70,8 @@ export class MainComponent implements OnInit {
   public getLanguages() {
     this.http.get('https://api.cognitive.microsofttranslator.com/languages?api-version=3.0&scope=translation')
       .subscribe(response => {
-        console.log('Reponse',response);
         this.responseLanguages = response;
         this.azureLanguages = Object.keys(this.responseLanguages.translation)
-        console.log('Languages',this.azureLanguages);
         return response;
     });
   }
@@ -102,9 +99,6 @@ export class MainComponent implements OnInit {
               this.translation.initial_lang = r.detectedLanguage.language;
               this.translation.translation_text = r.translations[0].text;
             });
-
-            console.log('Current translation',this.translation);
-
             this.translations.push(this.translation);
             localStorage.setItem('user-translation', JSON.stringify(this.translations));
           } else if (response.error.code != '') {
