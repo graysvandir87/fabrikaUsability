@@ -2,18 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DataService } from "../service/data.service";
 import uuid from 'uuid';
-// import { GoogleObj } from '../models/solution';
 
 import { SolutionService } from '../service/solution.service';
 import { Solution, GoogleObj } from '../models/solution';
 import { GoogletranslateService } from '../service/googletranslate.service';
-
-// declare var translate: any;
-// declare var require: NodeRequire;
-
-// const translate = require('google-translate-api');
-
-// import translate from 'google-translate-api';
 
 @Component({
   selector: 'app-main',
