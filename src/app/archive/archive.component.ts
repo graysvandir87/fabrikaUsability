@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ArchiveComponent implements OnInit {
 
-  constructor() { }
+  translations: Array<any>;
+
+  constructor() {
+    this.translations = [];
+   }
 
   ngOnInit(): void {
+    console.log('Created archive component...');
+		localStorage.getItem('user-translation') ? this.translations = JSON.parse(localStorage.getItem('user-translation')) : this.translations = [];
+		console.log(this.translations);
   }
 
 }

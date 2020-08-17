@@ -1,1 +1,9 @@
-<p>archive works!</p>
+<div>
+    <h1>Archive</h1>
+
+    <mat-card *ngFor="let item of translations" class="my-card">
+        <mat-icon class="my-icon">note</mat-icon> {{item.translation_name}} (initial: {{item.initial_lang}}; translation: {{item.translation_lang}})
+        <span class="my-spacer"></span>
+        <mat-icon class="open-icon" (click)="openDocument(item)">visibility</mat-icon>
+    </mat-card>
+</div>
