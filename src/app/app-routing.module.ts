@@ -1,7 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { MainComponent } from './main/main.component';
+import { ArchiveComponent } from './archive/archive.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path: '', component: MainComponent },
+  { path: 'archive', component: ArchiveComponent },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

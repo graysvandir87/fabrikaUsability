@@ -18,11 +18,15 @@ import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
+import { MainComponent } from './main/main.component';
+import { ArchiveComponent } from './archive/archive.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavigationComponent
+    NavigationComponent,
+    MainComponent,
+    ArchiveComponent
   ],
   imports: [
     BrowserModule,
