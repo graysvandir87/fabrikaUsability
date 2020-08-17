@@ -101,6 +101,7 @@ export class MainComponent implements OnInit {
             });
             this.translations.push(this.translation);
             localStorage.setItem('user-translation', JSON.stringify(this.translations));
+            this.showUploadBtn = false;
           } else if (response.error.code != '') {
             alert('Ошибка обращения к серверу')
           }
