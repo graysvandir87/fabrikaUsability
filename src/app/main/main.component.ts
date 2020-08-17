@@ -34,6 +34,13 @@ export class MainComponent implements OnInit {
 		localStorage.getItem('user-translation') ? this.translations = JSON.parse(localStorage.getItem('user-translation')) : this.translations = [];
   }
 
+  public setTranslation(item) {
+		console.log('Get: ', item);
+		this.translations.push(item);
+		localStorage.setItem('user-translation', JSON.stringify(this.translations));
+		this.clearForm();
+	}
+
   public clearForm() {
 		this.translation = {};
 	}

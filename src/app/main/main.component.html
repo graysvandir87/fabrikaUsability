@@ -1,1 +1,45 @@
-<p>main works!</p>
+<div class="form-input-wrapper">
+	<mat-label style="margin-right: 8px;">Enter name for translation: </mat-label>
+	<input type="text" [(ngModel)]="translation.translation_name" class="my-input">
+</div>
+<div class="main-form">
+	<div class="main-form-block">
+		<div class="main-form-block-inner">
+			<mat-label>Choose language for initial text</mat-label>
+			<mat-select [(ngModel)]="translation.initial_lang" name="languages" class="my-select">
+				<mat-option [value]="" selected></mat-option>
+				<mat-option *ngFor="let option of languages" [value]="option.value">
+					{{option.name}}
+				</mat-option>
+			</mat-select>
+		</div>
+		<div class="main-form-block-inner">
+			<mat-label>Enter initial text</mat-label>
+			<textarea matInput placeholder="Enter text..." [(ngModel)]="translation.initial_text"></textarea>
+		</div>
+	</div>
+	<div class="main-form-block">
+		<div class="main-form-block-inner">
+			<mat-label>Choose language for translation</mat-label>
+			<mat-select [(ngModel)]="translation.translation_lang" name="languages" class="my-select">
+				<mat-option [value]="" selected></mat-option>
+				<mat-option *ngFor="let option of languages" [value]="option.value">
+					{{option.name}}
+				</mat-option>
+			</mat-select>
+		</div>
+		<div class="main-form-block-inner">
+			<mat-label>Enter translation</mat-label>
+			<textarea matInput placeholder="Enter translation..." [(ngModel)]="translation.translation_text"></textarea>
+		</div>
+	</div>
+</div>
+<div class="form-button-wrapper">
+	<button
+		*ngIf="showUploadBtn"
+		mat-raised-button
+		color="primary"
+		(click)="setTranslation(translation)">
+		Upload
+	</button>
+</div>
