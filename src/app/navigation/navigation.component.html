@@ -1,0 +1,19 @@
+<mat-toolbar color="primary">
+	<a class="logo-link" [routerLink]="['/']">
+		<h1>My Application</h1>
+	</a>
+	<span class="my-spacer"></span>
+	<a mat-button href="/">Main</a>
+	<a mat-button href="/archive">Archive</a>
+	<a mat-button href="/" (click)="onDestroy()">Destroy</a>
+</mat-toolbar>
+
+<style lang="scss" scoped>
+	.my-spacer {
+		flex: 1 1 auto;
+	}
+	.logo-link {
+		text-decoration: none;
+		color: inherit;
+	}
+</style>
