@@ -3,8 +3,13 @@
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "types": []
+    "types": ["node"]
   },
+  "amgularCompilerOptions": {
+      "types" : ["node"]
+  },
+  "esModuleInterop": true,
+  "allowSyntheticDefaultImports": true,
   "files": [
     "src/main.ts",
     "src/polyfills.ts"

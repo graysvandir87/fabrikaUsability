@@ -23,6 +23,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { DataService } from './service/data.service';
+import { GoogletranslateService } from './service/googletranslate.service';
+
+import { SolutionService } from './service/solution.service';
 
 @NgModule({
   declarations: [
@@ -52,7 +55,9 @@ import { DataService } from './service/data.service';
 	MatCardModule,
 	MatTooltipModule
   ],
-  providers: [DataService],
+  providers: [
+	  DataService, GoogletranslateService, SolutionService
+	],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

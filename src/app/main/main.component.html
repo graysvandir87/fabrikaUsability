@@ -1,4 +1,16 @@
 <div class="form-input-wrapper">
+	<!-- <h1>{{ solData.title }}</h1>
+	<h2>{{ solData.description }}</h2>
+	<p>{{ solData.detail }}</p>
+	
+	<label for="lang">Choose Language: </label>
+	<mat-select [(ngModel)]="lang" name="lang" class="my-select">
+	  <mat-option [value]="" selected></mat-option>
+	  <mat-option *ngFor="let option of languages" [value]="option.value">{{option.name}}</mat-option>
+	</mat-select>
+	
+	<button id="translatebtn" (click)="testConnection()">Translate</button> -->
+
 	<mat-label style="margin-right: 8px;">Enter name for translation: </mat-label>
 	<input type="text" [(ngModel)]="translation.translation_name" class="my-input">
 </div>
@@ -41,5 +53,12 @@
 		color="primary"
 		(click)="setTranslation(translation)">
 		Upload
+	</button>
+
+	<button
+		mat-raised-button
+		color="primary"
+		(click)="getLanguages()">
+		Test connection
 	</button>
 </div>

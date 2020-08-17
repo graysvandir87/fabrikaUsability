@@ -13,5 +13,13 @@
     {
       "path": "./tsconfig.spec.json"
     }
-]
+  ],
+  "compilerOptions": {
+      "types" : ["node"]
+  },
+  "amgularCompilerOptions": {
+      "types" : ["node"]
+  },
+  "esModuleInterop": true,
+  "allowSyntheticDefaultImports": true
 }
