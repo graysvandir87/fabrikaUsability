@@ -71,7 +71,7 @@ export class MainComponent implements OnInit {
   public translateText(item){
 
     const headers = { 
-      'Ocp-Apim-Subscription-Key': 'b76bf350a06c42b885c06d58ab69f0f9',
+      'Ocp-Apim-Subscription-Key': 'key1',
       'Ocp-Apim-Subscription-Region': 'westeurope',
       'Content-type': 'application/json',
       'X-ClientTraceId': uuid.v4().toString()
